@@ -400,6 +400,15 @@
         color: var(--primary-color);
       }
 
+      .hamburger {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
       /* Animations */
       @keyframes slideInDown {
         from {
@@ -427,6 +436,57 @@
           transform: translate3d(85px, 0, 0);
         }
       }
+
+      /* Media Queries for Responsiveness */
+      @media (max-width: 768px) {
+        nav .container {
+          justify-content: space-between;
+        }
+
+        .nav-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          width: 100%;
+          background: var(--header-background);
+          flex-direction: column;
+          align-items: center;
+          padding: 1rem 0;
+          border-top: 1px solid var(--border-color);
+        }
+
+        .nav-menu.active {
+          display: flex;
+        }
+
+        .nav-menu li {
+          margin: 0.5rem 0;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        header h1 {
+          font-size: 2.5rem;
+        }
+
+        .about-content {
+          flex-direction: column;
+        }
+
+        .tab-buttons {
+          flex-direction: row;
+          flex-wrap: wrap;
+          width: 100%;
+        }
+
+        .tab-btn {
+          flex-grow: 1;
+          text-align: center;
+        }
+      }
     </style>
   </head>
 
@@ -434,7 +494,7 @@
     <nav>
       <div class="container">
         <a href="#" class="logo">Hamdi Farid</a>
-        <ul>
+        <ul class="nav-menu" id="nav-menu">
           <li><a href="#about">About</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#projects">Projects</a></li>
@@ -449,6 +509,9 @@
             </button>
           </li>
         </ul>
+        <button class="hamburger" id="hamburger">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </nav>
     <header>
@@ -813,6 +876,14 @@
       if (savedTheme) {
         setTheme(savedTheme);
       }
+
+      // Hamburger Menu
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
     </script>
   </body>
 </html>
