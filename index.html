@@ -1,179 +1,818 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hamdi Yaser Farid - Resume</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
 
-<body>
+      :root {
+        --primary-color: #67c753;
+        --background-color: #121212;
+        --text-color: #e0e0e0;
+        --card-background: #1e1e1e;
+        --header-background: #181818;
+        --border-color: #333;
+        --card-hover-background: #2a2a2a;
+        --card-shadow-color: rgba(0, 0, 0, 0.3);
+        --card-hover-shadow-color: rgba(0, 0, 0, 0.5);
+      }
+
+      body.light-mode {
+        --background-color: #f0f2f5;
+        --text-color: #333;
+        --card-background: #ffffff;
+        --header-background: #f8f9fa;
+        --border-color: #ddd;
+        --card-hover-background: #f1f1f1;
+        --card-shadow-color: rgba(0, 0, 0, 0.1);
+        --card-hover-shadow-color: rgba(0, 0, 0, 0.2);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .container {
+        padding: 0 2rem;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--header-background);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        z-index: 1000;
+        border-bottom: 1px solid var(--border-color);
+        transition: background-color 0.3s;
+      }
+
+      nav .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      nav .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+        text-decoration: none;
+      }
+
+      nav ul {
+        display: flex;
+        align-items: center;
+        list-style: none;
+      }
+
+      nav ul li {
+        margin-left: 2rem;
+      }
+
+      nav ul li a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      nav ul li a:hover {
+        color: var(--primary-color);
+      }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        color: var(--text-color);
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .theme-toggle:hover {
+        color: var(--primary-color);
+      }
+
+      header {
+        background-color: var(--header-background);
+        position: relative;
+        text-align: center;
+        color: var(--text-color);
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: background-color 0.3s;
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 2;
+        padding: 2rem;
+      }
+
+      header h1 {
+        margin-bottom: 0.5rem;
+        font-size: 3.5rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        animation: slideInDown 1s ease-out;
+      }
+
+      header p {
+        font-size: 1.3rem;
+        font-weight: 300;
+        margin-bottom: 2rem;
+      }
+
+      .waves-container {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 15vh;
+        z-index: 1;
+      }
+
+      .waves {
+        position: relative;
+        width: 100%;
+        height: 15vh;
+        margin-bottom: -7px; /*Fix for safari gap*/
+        min-height: 100px;
+        max-height: 150px;
+      }
+
+      .parallax > use {
+        animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+      }
+      .parallax > use:nth-child(1) {
+        animation-delay: -2s;
+        animation-duration: 7s;
+        fill: rgba(103, 199, 83, 0.7);
+      }
+      .parallax > use:nth-child(2) {
+        animation-delay: -3s;
+        animation-duration: 10s;
+        fill: rgba(103, 199, 83, 0.5);
+      }
+      .parallax > use:nth-child(3) {
+        animation-delay: -4s;
+        animation-duration: 13s;
+        fill: rgba(103, 199, 83, 0.3);
+      }
+      .parallax > use:nth-child(4) {
+        animation-delay: -5s;
+        animation-duration: 20s;
+        fill: var(--primary-color);
+      }
+
+      main > section {
+        padding: 6rem 0;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      }
+
+      main > section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        background: linear-gradient(90deg, var(--primary-color), #4abaee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .card {
+        background: var(--card-background);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px var(--card-shadow-color);
+        margin-bottom: 2rem;
+        border-left: 4px solid var(--primary-color);
+        transition: transform 0.3s ease, box-shadow 0.3s ease,
+          background-color 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        background: var(--card-hover-background);
+        box-shadow: 0 8px 30px var(--card-hover-shadow-color);
+      }
+
+      h3 {
+        font-size: 1.7rem;
+        margin-bottom: 1rem;
+        color: var(--text-color);
+      }
+
+      h4 {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        margin-bottom: 0.2rem;
+        color: var(--text-color);
+      }
+
+      .about-content {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+      }
+
+      .tab-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .tab-btn {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        background: var(--card-background);
+        color: var(--text-color);
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+        width: 150px;
+        text-align: left;
+      }
+
+      .tab-btn.active,
+      .tab-btn:hover {
+        background: var(--primary-color);
+        color: #fff;
+      }
+
+      .tab-content {
+        flex-grow: 1;
+      }
+
+      .tab-pane {
+        display: none;
+      }
+
+      .tab-pane.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      li {
+        margin-bottom: 0.75rem;
+        position: relative;
+        padding-left: 1.5em;
+      }
+
+      li::before {
+        content: "›";
+        position: absolute;
+        left: 0;
+        color: var(--primary-color);
+        font-weight: bold;
+        font-size: 1.2em;
+        line-height: 1;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .skills-grid .card {
+        text-align: center;
+        border-left: none;
+        border-top: 4px solid var(--primary-color);
+        padding: 1.5rem;
+      }
+
+      .skills-grid .card h3 {
+        font-size: 1.2rem;
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .services-grid .card {
+        text-align: center;
+        padding: 2.5rem 2rem;
+        border-top: 4px solid var(--primary-color);
+        border-left: none;
+      }
+
+      .service-icon {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 4rem 0 2rem;
+        margin-top: 2rem;
+        background-color: var(--header-background);
+        color: var(--text-color);
+        transition: background-color 0.3s;
+      }
+
+      .contact-form {
+        max-width: 600px;
+        margin: 0 auto 3rem;
+        text-align: left;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        background: var(--card-background);
+        border: 1px solid var(--border-color);
+        border-radius: 5px;
+        color: var(--text-color);
+        transition: background-color 0.3s, border-color 0.3s;
+      }
+
+      .contact-form .btn {
+        width: 100%;
+        border: none;
+        cursor: pointer;
+      }
+
+      .social-links {
+        margin-bottom: 2rem;
+      }
+
+      .social-links a {
+        color: var(--text-color);
+        font-size: 2rem;
+        margin: 0 1rem;
+        transition: color 0.3s ease;
+      }
+
+      .social-links a:hover {
+        color: var(--primary-color);
+      }
+
+      /* Animations */
+      @keyframes slideInDown {
+        from {
+          transform: translateY(-50%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes move-forever {
+        0% {
+          transform: translate3d(-90px, 0, 0);
+        }
+        100% {
+          transform: translate3d(85px, 0, 0);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div class="container">
+        <a href="#" class="logo">Hamdi Farid</a>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <button
+              class="theme-toggle"
+              id="theme-toggle"
+              aria-label="Toggle theme"
+            >
+              <i class="fas fa-sun"></i>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </nav>
     <header>
-        <h1> Hamdi Yaser Farid</h1>
-        <p> 💻 Full Stack Developer | 🧠 AI/ML Enthusiast</p>
+      <div class="header-content">
+        <h1>Hamdi Yaser Farid</h1>
+        <p>💻 Full Stack Developer | 🧠 AI/ML Enthusiast</p>
+      </div>
+      <div class="waves-container">
+        <svg
+          class="waves"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 24 150 28"
+          preserveAspectRatio="none"
+          shape-rendering="auto"
+        >
+          <defs>
+            <path
+              id="gentle-wave"
+              d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+            />
+          </defs>
+          <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" />
+            <use xlink:href="#gentle-wave" x="48" y="3" />
+            <use xlink:href="#gentle-wave" x="48" y="5" />
+            <use xlink:href="#gentle-wave" x="48" y="7" />
+          </g>
+        </svg>
+      </div>
     </header>
-    <section>
-        <h2> 👨🏽‍💼 About Me</h2>
-        <p>👋 Hi there! I'm Hamdi Farid, a passionate developer with a strong focus on creating innovative solutions
-            using a diverse set of technologies. I specialize in building robust, scalable applications and AI/ML
-            models.</p>
-        <h2> 🔧 Technologies Used</h2>
-        <ul>
-            <h3>📲 Front End</h3>
-            <li> HTML, CSS, JavaScript, Flutter, Ionic</li>
-            <h3> 🖥 Back End</h3>
-            <li>Node.js, Express, C#, ASP.NET MVC, ASP.NET Core</li>
-            <h3> 🛢 Database</h3>
-            <li>MongoDB, MySQL, Entity Framework, Sequalizer</li>
-            <h3> 🧠 Artificial Intelligence and Machine Learning</h3>
-            <li> Python, TensorFlow, Keras, Scikit-learn</li>
-        </ul>
 
-    </section>
-    <section>
-        <h2> 🧑🏽‍💻 Experience</h2>
-        <h3>Hardware/Software Engineer (Research and Development Branch)</h3>
-        <p>Xclency Controls | Thane, Maharashtra</p>
-        <p>2022-Present</p>
-        <ul>
-            <li>Worked as a C#, Python, and Linux developer. Successfully integrated C# .dll files with Schneider
-                Electric's EWS system, managed SQL databases, and provided client training.</li>
-            <li>Worked with Linux based systems for development and deployment.</li>
-            <li>Was responsible for development of Web APIs using .NET CORE with MVC architecture.</li>
-            <li>Handled production support tickets, communicated with clients, resolved errors, and provided
-                troubleshooting.</li>
-            <li>Collaborated on GitHub for frontend and backend development, resolving bugs efficiently and rigorously
-                testing features for reliability.</li>
-        </ul>
+    <main class="container">
+      <section id="about">
+        <h2>About Me</h2>
+        <div class="card">
+          <p>
+            👋 Hi there! I'm Hamdi Farid, a passionate developer with a strong
+            focus on creating innovative solutions using a diverse set of
+            technologies. I specialize in building robust, scalable applications
+            and AI/ML models.
+          </p>
+        </div>
+        <div class="about-content">
+          <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="skills">Skills</button>
+            <button class="tab-btn" data-tab="experience">Experience</button>
+            <button class="tab-btn" data-tab="education">Education</button>
+            <button class="tab-btn" data-tab="tech">Technologies</button>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active" id="skills">
+              <div class="skills-grid">
+                <div class="card">
+                  <h3>Adaptability</h3>
+                  <p>Adjusting to different screen sizes.</p>
+                </div>
+                <div class="card">
+                  <h3>Problem-solving</h3>
+                  <p>Adept at identifying issues and finding solutions.</p>
+                </div>
+                <div class="card">
+                  <h3>Creativity</h3>
+                  <p>Crafting visually appealing and intuitive UIs.</p>
+                </div>
+                <div class="card">
+                  <h3>Collaboration</h3>
+                  <p>Integrating with backend developers and designers.</p>
+                </div>
+                <div class="card">
+                  <h3>Communication</h3>
+                  <p>Understanding client needs and articulating solutions.</p>
+                </div>
+                <div class="card">
+                  <h3>Time Management</h3>
+                  <p>Balancing multiple tasks and deadlines.</p>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="experience">
+              <div class="card">
+                <h3>Software Developer</h3>
+                <p>
+                  <strong>Celusion Technologies Pvt Ltd | 2024-2025</strong>
+                </p>
+                <ul>
+                  <li>
+                    Worked as a Software Developer in Celusion Technologies Pvt
+                    Ltd. Was responsible for development of a web application
+                    using .NET CORE with MVC architecture.
+                  </li>
+                  <li>
+                    Handled production support tickets and client communication.
+                  </li>
+                  <li>Application Deployment and Management.</li>
+                  <li>
+                    Worked with Docker, Nginx, and Kubernetes, IIS, and SQL
+                    Server.
+                  </li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Hardware/Software Engineer</h3>
+                <p><strong>Xclency Controls | 2022-2024</strong></p>
+                <ul>
+                  <li>
+                    Worked as a C#, Python, and Linux developer, integrating C#
+                    .dll files with Schneider Electric's EWS system.
+                  </li>
+                  <li>
+                    Developed Web APIs using .NET CORE with MVC architecture.
+                  </li>
+                  <li>
+                    Handled production support tickets and client communication.
+                  </li>
+                </ul>
+              </div>
+              <div class="card">
+                <h3>Software Developer</h3>
+                <p><strong>Xclency Technology L.L.P | 2020-2022</strong></p>
+                <ul>
+                  <li>
+                    Designed, developed, and deployed an app on iOS and Android
+                    using Ionic.
+                  </li>
+                  <li>
+                    Collaborated on server-side code and implemented new app
+                    features with Node.js.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="tab-pane" id="education">
+              <div class="card">
+                <h4>Master's in Engineering Degree 2021-2024</h4>
+                <p>
+                  Vidhyalankar Institute of Technology, University of Mumbai
+                </p>
+                <h4>Bachelor's in Engineering Degree 2016-2020</h4>
+                <p>
+                  Saboo Siddik College of Engineering, University of Mumbai
+                  (EXTC)
+                </p>
+              </div>
+            </div>
+            <div class="tab-pane" id="tech">
+              <div class="card">
+                <h3>📲 Front End</h3>
+                <p>HTML, CSS, JavaScript, Flutter, Ionic</p>
+                <h3>🖥 Back End</h3>
+                <p>Node.js, Express, C#, ASP.NET MVC, ASP.NET Core</p>
+                <h3>🛢 Database</h3>
+                <p>MongoDB, MySQL, Entity Framework, Sequalizer</p>
+                <h3>🧠 AI/ML</h3>
+                <p>Python, TensorFlow, Keras, Scikit-learn</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <h3>Software Developer</h3>
-        <p>Xclency Technology L.L.P | Thane, Maharashtra</p>
-        <p>2020-2022</p>
-        <ul>
-            <li>Worked using Ionic App development platform to design, develop, and deploy an app on iOS and Android.
-            </li>
-            <li>Collaborated with senior developers to manage server-side code and implement new app features.</li>
-            <li>Worked with Node.js and JavaScript.</li>
-            <li>Conducted quality assurance tests to discover errors and optimize usability.</li>
-        </ul>
-    </section>
-    <section>
-        <h2> 👨🏽‍🎓 Education</h2>
-        <ul>
-            <h4>Master's in Engineering Degree 2021-2024</h4>
-            <p>Vidhyalankar Institute of Technology, University of Mumbai </p>
-            <h4>Bachelor's in Engineering Degree 2016-2020</h4>
+      <section id="services">
+        <h2>My Services</h2>
+        <div class="services-grid">
+          <div class="card">
+            <i class="fas fa-server service-icon"></i>
+            <h3>Application Deployment</h3>
             <p>
-                Saboo Siddik College of Engineering, University of Mumbai (EXTC)</p>
-        </ul>
-    </section>
-    <section>
-        <h2> 👨🏽‍🔬 Skills</h2>
-        <h3>Adaptability:</h3>
-        <ul>
-            <li>Like a fluid layout, capable of adjusting to different screen sizes.</li>
-        </ul>
+              Proficient in deploying and managing applications across various
+              environments. Experienced with Docker, Kubernetes, Nginx, and IIS,
+              ensuring smooth, scalable, and reliable releases.
+            </p>
+          </div>
+          <div class="card">
+            <i class="fas fa-cogs service-icon"></i>
+            <h3>API Integration</h3>
+            <p>
+              Skilled in designing and integrating robust APIs. I have
+              experience with both REST and SOAP protocols, connecting diverse
+              systems and enabling seamless data communication.
+            </p>
+          </div>
+          <div class="card">
+            <i class="fas fa-desktop service-icon"></i>
+            <h3>Front-End Development</h3>
+            <p>
+              Passionate about creating modern, responsive, and intuitive user
+              interfaces. I build engaging web and mobile front-ends using
+              technologies like Flutter, Ionic, and JavaScript.
+            </p>
+          </div>
+          <div class="card">
+            <i class="fas fa-database service-icon"></i>
+            <h3>Backend Development</h3>
+            <p>
+              Building robust and scalable server-side applications using
+              Node.js, C#, and ASP.NET. I focus on creating efficient and secure
+              backend systems to power your applications.
+            </p>
+          </div>
+          <div class="card">
+            <i class="fas fa-project-diagram service-icon"></i>
+            <h3>API Development</h3>
+            <p>
+              Specializing in the creation and management of high-performance
+              APIs. From design to production, I ensure your APIs are reliable,
+              secure, and easy to consume.
+            </p>
+          </div>
+          <div class="card">
+            <i class="fas fa-leaf service-icon"></i>
+            <h3>Efficient & Clean Code</h3>
+            <p>
+              Dedicated to writing clean, maintainable, and highly efficient
+              code. I follow best practices to ensure long-term quality and
+              scalability of the software.
+            </p>
+          </div>
+          <div class="card">
+            <i class="fas fa-brain service-icon"></i>
+            <h3>AI/ML Solutions</h3>
+            <p>
+              Leveraging Python, TensorFlow, and Keras to develop custom machine
+              learning models for tasks like image classification, and
+              integrating them into applications.
+            </p>
+          </div>
+        </div>
+      </section>
 
-        <h3>Problem-solving:</h3>
-        <ul>
-            <li>A bug-fixer, adept at identifying issues and finding solutions.</li>
-        </ul>
+      <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects-grid">
+          <div class="card">
+            <h3>Schneider Electric EWS Integration</h3>
+            <p>
+              Designed and developed C# DLL files for EWS based software in
+              Schneider Electric automation systems, managing SNMP, SQL, and web
+              apps.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Greenie-Energy IONIC App</h3>
+            <p>
+              Designed an app for locating charging stations, with Razor payment
+              integration and REST APIs for user management.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Node.js MVC Web App</h3>
+            <p>
+              Designed a web app for employee data management using Express,
+              MongoDB, and REST/SOAP APIs.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Linux KIOSK App</h3>
+            <p>
+              Designed a touchscreen app using Electron.js and Python to control
+              smart home appliances via MODBUS and SNMP.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Flutter EV Charging App</h3>
+            <p>
+              Developed the front-end for an EV charging app using Riverpod for
+              state management and WebSockets for real-time data.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Image Classification Model</h3>
+            <p>
+              Ongoing R&D to build and optimize custom TensorFlow models for use
+              in Dart and Node.js applications.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
 
-        <h3>Creativity:</h3>
-        <ul>
-            <li>A designer, crafting visually appealing and intuitive user interfaces.</li>
-        </ul>
+    <footer id="contact">
+      <div class="container">
+        <h2>Contact Me On</h2>
 
-        <h3>Collaboration:</h3>
-        <ul>
-            <li>A team player, seamlessly integrating with backend developers and designers.</li>
-        </ul>
-
-        <h3>Communication:</h3>
-        <ul>
-            <li>A good listener, able to understand client needs and articulate solutions.</li>
-        </ul>
-
-        <h3>Time Management:</h3>
-        <ul>
-            <li>A scheduler, balancing multiple tasks and deadlines.</li>
-        </ul>
-
-        <h3>Attention to Detail:</h3>
-        <ul>
-            <li>A perfectionist, ensuring every pixel is in its place.</li>
-        </ul>
-
-        <h3>Continuous Learning:</h3>
-        <ul>
-            <li>An updater, staying current with the latest technologies and trends.</li>
-        </ul>
-
-        <h3>Empathy:</h3>
-        <ul>
-            <li>A user advocate, considering the end user's perspective in every decision.</li>
-        </ul>
-
-        <h3>Resilience:</h3>
-        <ul>
-            <li>A fallback mechanism, bouncing back from setbacks and failures.</li>
-        </ul>
-
-
-
-    </section>
-    <section>
-        <h2> 🦺 Projects</h2>
-        <h3>Schneider Electric EWS Smart Connector Integration</h3>
-        <p>In this project, I was tasked to design and develop C# DLL files for EWS based software in Schneider Electric
-            automation systems. The task required managing source code for different types of correlated projects like
-            SNMP communication nodes, SQL data storage and retrieval for sensors using ADO.NET, and web apps that
-            provided a user interface for the engineer/technician to manage I/Os of the network. I was solely
-            responsible for designing, testing, and developing the architecture of the system to be deployed in foreign
-            gulf countries.</p>
-
-        <h3>App Development (IONIC) Greenie-Energy</h3>
-        <p>This project had a span of 4 months where I needed to design an app that would be used to locate charging
-            stations owned by the company. The app also had features such as Razor payment integration, charging
-            initiation, exemption, and recharge. I also designed and developed new APIs which communicated using REST
-            methods with the application for registering and logging in users. The app is currently available online on
-            the App Store as well as the Play Store. However, my terms of contract ended in 2022.</p>
-
-        <h3>Web App Development using Node.js MVC Architecture</h3>
-        <p>This project required designing a web app for employees in the company to manage their data. Due to low
-            relational conditions prompted during the tasks, I shifted my database from SQL to MongoDB as it provided
-            faster performance without the cost of relations. I used Express for my Node.js server and basic REST API
-            methods with a few exceptions of SOAP APIs.</p>
-
-        <h3>KIOSK Based Touchscreen App for Linux Systems using Electron.js</h3>
-        <p>This project was in correlation to the Schneider Electric systems where I had to design a full app with
-            features to control smart home appliances. Initially, I worked on the front end and back end of the
-            application using Electron.js and Node.js. Due to my experience and education in electronics, I shifted my
-            backend to Python to efficiently code and communicate with smart home systems. I mostly worked with
-            communication protocols like MODBUS and SNMP during this project and used SQL databases for data storage.
-        </p>
-
-        <h3>App Development Electric Vehicle Charging in Flutter (In Development)</h3>
-        <p>This recent project, currently on hold due to backend complications, has the front end of the app ready and
-            awaiting further development. I was tasked with translating UI/UX design to Flutter-based widgets and
-            handling state management using Riverpod dependency, deciding between stateless and stateful widgets for
-            screens and controls. I was responsible for handling the logic of the app, registration using the phone
-            number, and QR scanning with automatic light state. I also used Stream and Future builders for WebSocket and
-            Web API consumption.</p>
-
-        <h3>Machine Learning Image Classification</h3>
-        <p>Multiple and Binary Image Classification using TensorFlow (Research and Development): This ongoing project
-            involves creating a model that can detect custom images based on the company's needs. Currently, I am
-            researching optimizing my trained .h5 models or .keras models and using them in other programming languages
-            like Dart and Node.js. In the future, I plan to use these models for more complex image classification by
-            increasing variables in dense layers. For now, I am using basic training and validation dataset images to
-            identify efficient model layers for high accurate training, reducing underfitting, and overfitting
-            conditions.</p>
-    </section>
-    <footer>
-        <p>Contact: hamdi.yaser.farid@gmail.com</p>
+        <div class="social-links">
+          <a href="https://github.com/hamdifarid" target="_blank"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/hamdi-farid-6b8284203/"
+            target="_blank"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+        </div>
+        <p>Email: hamdi.yaser.farid@gmail.com | Phone: 9673745918</p>
+        <p>&copy; 2025 Hamdi Yaser Farid</p>
+      </div>
     </footer>
-</body>
 
+    <script>
+      // Scroll animations
+      const sections = document.querySelectorAll("main > section");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Tab functionality
+      const tabButtons = document.querySelectorAll(".tab-btn");
+      const tabPanes = document.querySelectorAll(".tab-pane");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+
+          tabPanes.forEach((pane) => {
+            if (pane.id === button.dataset.tab) {
+              pane.classList.add("active");
+            } else {
+              pane.classList.remove("active");
+            }
+          });
+        });
+      });
+
+      // Theme Toggler
+      const themeToggle = document.getElementById("theme-toggle");
+      const body = document.body;
+      const themeIcon = themeToggle.querySelector("i");
+
+      function setTheme(theme) {
+        if (theme === "light") {
+          body.classList.add("light-mode");
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+          localStorage.setItem("theme", "light");
+        } else {
+          body.classList.remove("light-mode");
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+          localStorage.setItem("theme", "dark");
+        }
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme = localStorage.getItem("theme") || "dark";
+        setTheme(currentTheme === "dark" ? "light" : "dark");
+      });
+
+      // Load saved theme from local storage
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        setTheme(savedTheme);
+      }
+    </script>
+  </body>
 </html>
