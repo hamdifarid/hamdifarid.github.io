@@ -400,6 +400,12 @@
         color: var(--primary-color);
       }
 
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
       .hamburger {
         display: none;
         background: none;
@@ -494,24 +500,24 @@
     <nav>
       <div class="container">
         <a href="#" class="logo">Hamdi Farid</a>
-        <ul class="nav-menu" id="nav-menu">
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li>
-            <button
-              class="theme-toggle"
-              id="theme-toggle"
-              aria-label="Toggle theme"
-            >
-              <i class="fas fa-sun"></i>
-            </button>
-          </li>
-        </ul>
-        <button class="hamburger" id="hamburger">
-          <i class="fas fa-bars"></i>
-        </button>
+        <div class="nav-right">
+          <ul class="nav-menu" id="nav-menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Toggle theme"
+          >
+            <i class="fas fa-sun"></i>
+          </button>
+          <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
       </div>
     </nav>
     <header>
